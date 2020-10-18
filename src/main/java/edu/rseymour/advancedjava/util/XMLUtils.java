@@ -122,7 +122,7 @@ public class XMLUtils {
     public static void addQuote(Timestamp time, BigDecimal price, String symbol)
             throws UnknownStockSymbolException {
         StockSymbolDAO stockSymbolDAO;
-        // check the db to see if the stock
+        // check the db to see if the stock symbol exists
         stockSymbolDAO = DatabaseUtils.findUniqueResultBy("symbol", symbol, StockSymbolDAO.class, true);
         if (stockSymbolDAO == null) {
             XMLUtils.addSymbol(symbol);
@@ -163,11 +163,11 @@ public class XMLUtils {
      * Adds a list of stocks to the database. This method unmarshalls a string of stock
      * into any model class that contains a List of stocks as an attribute.
      *
-     * @param xmlInstance
-     * @param T
-     * @param schemaName
-     * @throws InvalidXMLException
-     * @throws UnknownStockSymbolException
+     * @param xmlInstance String representation of an XML file
+     * @param T           class that the XML file is modeled on
+     * @param schemaName  path to the .xsd file that validates the XML schema for T
+     * @throws InvalidXMLException if the XML schema is not formed correctly
+     * @throws UnknownStockSymbolException if the stock symbol is invalid
      */
     public static void addListOfQuotes(String xmlInstance, Class T, String schemaName)
             throws InvalidXMLException, UnknownStockSymbolException {
@@ -199,7 +199,8 @@ public class XMLUtils {
      * Helper method that adds a symbol to the stock_symbol table.
      *
      * @param symbol the name of the symbol to add
-     * @throws UnknownStockSymbolException
+     * @throws UnknownStockSymbolException if the stock symbol is not stored in the
+     *                                     database
      */
     public static void addSymbol(String symbol) throws UnknownStockSymbolException {
         StockSymbolDAO stockSymbolDAO = new StockSymbolDAO();
