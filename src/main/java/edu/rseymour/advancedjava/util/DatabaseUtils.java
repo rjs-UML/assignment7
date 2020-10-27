@@ -43,7 +43,7 @@ public class DatabaseUtils {
 //    private static String getPropFromConfig(String property) {
 //        String s = null;
 //        Configuration cfg = new Configuration();
-//        cfg.configure(HIBERNATE_CONFIGURATION_FILE); //hibernate config xml file name
+//        cfg.configure(HIBERNATE_CONFIGURATION_FILE); //hibernate config edu.rseymour.advancedjava.xml file name
 //        return cfg.getProperties().get(property).toString();
 //    }
 
@@ -144,8 +144,6 @@ public class DatabaseUtils {
         // improvement - previous versions would not single errors in the SQL itself.
         if (errorLog.length() != 0) {
             throw new DatabaseInitializationException("SQL init script contained errors:" + errorLog.toString());
-
-
         }
     }
 
